@@ -1,1 +1,1 @@
-web: node ./scripts/demo.js
+web: node index.js
