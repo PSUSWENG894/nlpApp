@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "coverage": "node ./scripts/postpublish/coverage.js"
   },
   "author": "",
   "license": "MIT",
