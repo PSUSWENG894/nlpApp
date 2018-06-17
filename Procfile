@@ -1,1 +1,1 @@
-web: node scripts/es6build.js
+web: node ./scripts/build/index.js
