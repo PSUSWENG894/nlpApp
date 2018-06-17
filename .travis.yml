@@ -13,4 +13,12 @@ before_install:
 
 install: npm install
 
-script: npm run demo
+script: npm run build
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY_MRC5163
+  app:
+    nlp-app-sweng894
+  on:
+branch: master
