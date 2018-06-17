@@ -1,1 +1,1 @@
-web: node scratch.js
+web: node hello.js
