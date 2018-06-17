@@ -1,1 +1,1 @@
-web: node ./scripts/build/index.js
+web: node ./scripts/demo.js
