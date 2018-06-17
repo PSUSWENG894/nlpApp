@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 
 rl.question('Enter the text you would like to have tagged: ', (answer) => {
   // TODO: Log the answer in a database
-  let textInput = nlp(${answer});
+  let textInput = nlp('${answer}');
   textInput.terms().data();
   textInput.out('text');
   nlp(${answer}).debug();
