@@ -1,1 +1,1 @@
-web: node hello.js
+web: node scripts/es6build.js
