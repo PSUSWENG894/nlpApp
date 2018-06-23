@@ -21,4 +21,4 @@ deploy:
   app:
     nlp-app-sweng894
   on:
-branch: master
+    branch: master
