@@ -3,6 +3,8 @@ var util = require('util');
 var fs = require('fs');
 var url = require('url');
 
+var PORT = process.env.PORT || 5000;
+
 var server = http.createServer(function (req, res) {
     var url_parts = url.parse(req.url, true);
     util.log(url_parts);
