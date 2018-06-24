@@ -15,8 +15,15 @@ var server = http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
 });
 
-server.listen(443);
-util.log('Server listening on port 443');
+//const server = http.createServer((req, res) => {
+//  res.statusCode = 200;
+//  res.setHeader('Content-Type', 'text/plain');
+//  res.end('The {"Location": "Philadelphia"} {"Organization": "Flyers"} are the best hockey team in the {"Organization": "NHL"}, and {"Person": "Claude Giroux"} should have won {"Organization": "MVP"}.\n');
+//});
+
+server.listen(PORT, () => {
+  util.log(`Server running ${PORT}/`);
+});
 
 function tagInput(res, url_parts) {
 	res,end("Data passed to tagInput -> input: " + url_parts.query.inputString);
