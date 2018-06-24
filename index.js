@@ -27,4 +27,4 @@ server.listen(PORT, () => {
 
 function tagInput(res, url_parts) {
 	res,end("Data passed to tagInput -> input: " + url_parts.query.inputString);
-}
+};
