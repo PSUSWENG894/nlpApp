@@ -1,5 +1,5 @@
 var http = require('http');
-var util = require('util');i
+var util = require('util');
 var fs = require('fs');
 var url = require('url');
 
@@ -27,4 +27,4 @@ server.listen(PORT, () => {
 
 function tagInput(res, url_parts) {
 	res,end("Data passed to tagInput -> input: " + url_parts.query.inputString);
-};
+}
