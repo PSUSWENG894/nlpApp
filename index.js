@@ -9,12 +9,12 @@ var server = http.createServer(function (req, res) {
     var url_parts = url.parse(req.url, true);
     util.log(url_parts);
     if (url_parts.pathname == '/')
-	fs.readFile('./nodeforms/nlpform.html', function(error, data) {
+	fs.readFile('./nodeform/nlpform.html', function(error, data) {
 		res.end(data);
 	});
     else if(url_parts == '/tagInput')
 	tagInput(res,url_parts);
-    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.writeHead(200, {'Content-Type': 'text/html'});
 });
 
 //const server = http.createServer((req, res) => {
