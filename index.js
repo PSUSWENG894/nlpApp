@@ -9,7 +9,7 @@ var server = http.createServer(function (req, res) {
     var url_parts = url.parse(req.url, true);
     util.log(url_parts);
     if (url_parts.pathname == '/')
-	fs.readfile('./nodeforms/nlpform.html', function(error, data) {
+	fs.readFile('./nodeforms/nlpform.html', function(error, data) {
 		res.end(data);
 	});
     else if(url_parts == '/tagInput')
