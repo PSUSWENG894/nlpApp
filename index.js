@@ -2,6 +2,7 @@ var http = require('http');
 var util = require('util');
 var fs = require('fs');
 var url = require('url');
+var nlp = require('compromise');
 
 var PORT = process.env.PORT || 5000;
 
@@ -28,5 +29,14 @@ server.listen(PORT, () => {
 });
 
 function tagInput(res, url_parts) {
-	res,end("Data passed to tagInput -> input: " + url_parts.query.inputString);
+	var inputString = url+parts.query.inputString;
+	var tags = "People: \n";
+	res.end("Data passed to tagInput -> input: " + inputString);
+	var doc = nlp(inputSring);
+	tags = tags + doc.people().data();
+	tags = tags + "\n Places: \n";
+	tags = tags + doc.places().data();
+	tags = tags + "\n Organizations: \m";
+	tags = tags + doc.organizations().data();
+	document.getElementById("outputString").innerHtml(tags);
 }
