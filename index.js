@@ -29,7 +29,7 @@ server.listen(PORT, () => {
 });
 
 function tagInput(res, url_parts) {
-	var inputString = url+parts.query.inputString;
+	var inputString = url_parts.query.inputString;
 	var tags = "People: \n";
 	res.end("Data passed to tagInput -> input: " + inputString);
 	var doc = nlp(inputSring);
