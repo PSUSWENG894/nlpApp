@@ -10,15 +10,22 @@
       <label>Please fill in the text area below to have the NLP tag it.<br></br></label>
       <textarea name="inputString" id="inputString" rows="8" cols="80" placeholder="Enter text for NLP here">President Donald Trump has decided to force NASA to collect money from private investors like Bill Gates from Seattle.</textarea><br/>
       <input type="radio" name="outputFormat" value="XML"> XML<br/>
-      <input type="radio" name="outputFormat" value="List"> List<br/>
-      <input type="radio" name="outputFormat" value="JSON" checked> JSON<br/>
+      <input type="radio" name="outputFormat" value="List" checked> List<br/>
+      <input type="radio" name="outputFormat" value="JSON"> JSON<br/>
       <input type="submit" name="submit" id="submit" value="Submit"/>
     </form>
   </div>
   <br></br>
   <div>
     <h2>The tagged string will appear below.</h2>
-    <textarea name="outputString" id="outputString" rows="8" cols="80" readonly="true">President {"Person": "Donald Trump"} has decided to force {"Organization": "NASA"} to collect money from private investors like {"Person": "Bill Gates"} from {"Location": "Seattle"}.</textarea>
-  </div>/
+    <textarea name="outputString" id="outputString" rows="8" cols="80" readonly="true">People: 
+	    Donald Trump, Bill Gates 
+	    
+	    Organizations: 
+	    NASA 
+	    
+	    Locations: 
+	    Seattle.</textarea>
+  </div>
 </body>
 </html>
