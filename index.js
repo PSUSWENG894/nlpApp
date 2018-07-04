@@ -31,12 +31,12 @@ server.listen(PORT, () => {
 function tagInput(res, url_parts) {
 	var inputString = url_parts.query.inputString;
 	var tags = "People: \n";
-	res.end("Data passed to tagInput -> input: " + inputString);
+	console.log("Data passed to tagInput -> input: " + inputString);
 	var doc = nlp(inputSring);
 	tags = tags + doc.people().data();
 	tags = tags + "\n Places: \n";
 	tags = tags + doc.places().data();
-	tags = tags + "\n Organizations: \m";
+	tags = tags + "\n Organizations: \n";
 	tags = tags + doc.organizations().data();
 	document.getElementById("outputString").innerHtml(tags);
 }
