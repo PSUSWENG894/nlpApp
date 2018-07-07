@@ -27,7 +27,6 @@ app.get('/form', function (req, res) {
   html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'>";
   html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'>";
   html += "</form>";
-        document.getElementById("outputString").innerHtml(tags);
   html += "</body>";
   res.send(html);
 });
