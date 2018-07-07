@@ -48,10 +48,10 @@ app.post('/tagged', urlencodedParser, function (req, res){
         var tags = "People: \n";
         console.log("Data passed to tagInput -> input: " + inputString);
         var doc = nlp(inputString);
-        tags = tags + doc.people().data();
+        tags = tags + doc.people().out();
         tags = tags + "\n Places: \n";
-        tags = tags + doc.places().data();
+        tags = tags + doc.places().out();
         tags = tags + "\n Organizations: \n";
-        tags = tags + doc.organizations().data();
+        tags = tags + doc.organizations().out();
 	return tags;
  }
