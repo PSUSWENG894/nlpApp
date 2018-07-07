@@ -22,7 +22,7 @@ var server = http.createServer(function (req, res) {
   	} else if (req.method === 'GET' || req.method === 'get') {
 		fs.readFile('./nodeForm/nlpForm.html', function(error, data) {
 			res.end(data);
-		}
+		});
 	}
     var url_parts = url.parse(req.url, true);
     console.log(url_parts);
