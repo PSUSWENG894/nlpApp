@@ -16,24 +16,13 @@ var server = app.listen(PORT, function () {
  
  
 app.get('/', function (req, res) {
-  var html='';
-  html +="<body>";
-  html += "<form method='post' action='/tagged' name='tagForm'>";
-  html += "<label>Please fill in the text area below to have the NLP tag it.</label><br/>";
-  html += "<textarea name='inputString' id='inputString' rows='8' cols='80' placeholder='Enter text for NLP here'></textarea><br/>";
-  html += "<label>Select from the output formats below</label><br/>";
-  html += "<input type='radio' name='outputFormat' value='XML'> XML<br/>";
-  html += "<input type='radio' name='outputFormat' value='LIST' checked> List<br/>";
-  html += "<input type='radio' name='outputFormat' value='JSON'> JSON<br/>";
-  html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
-  html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
-  html += "</form>";
-  html += "</body>";
+  var html=printHtmlForm();
   res.send(html);
 });
  
 app.post('/tagged', urlencodedParser, function (req, res){
-  var reply='';
+  var reply=printHtmlForm();
+  reply += "<br/><b>The tagged input is shown below:</b><br/>";
   var input = req.body.inputString;
   console.log(input);
   var outputFormat = req.body.outputFormat;
@@ -54,4 +43,21 @@ app.post('/tagged', urlencodedParser, function (req, res){
         tags = tags + "<br/>Organizations: <br/>";
         tags = tags + doc.organizations().out();
 	return tags;
+ }
+
+ function printHtmlForm() {
+  var html='';
+  html +="<body>";
+  html += "<form method='post' action='/tagged' name='tagForm'>";
+  html += "<label>Please fill in the text area below to have the NLP tag it.</label><br/>";
+  html += "<textarea name='inputString' id='inputString' rows='8' cols='80' placeholder='Enter text for NLP here'></textarea><br/>";
+  html += "<label>Select from the output formats below</label><br/>";
+  html += "<input type='radio' name='outputFormat' value='XML'> XML<br/>";
+  html += "<input type='radio' name='outputFormat' value='LIST' checked> List<br/>";
+  html += "<input type='radio' name='outputFormat' value='JSON'> JSON<br/>";
+  html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
+  html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
+  html += "</form>";
+  html += "</body>";
+  return html;
  }
