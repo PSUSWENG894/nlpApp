@@ -7,14 +7,25 @@ var nlp = require('compromise');
 var PORT = process.env.PORT || 5000;
 
 var server = http.createServer(function (req, res) {
+	if (req.method === 'POST') {
+	    var data = '';
+	
+	    req.on('data', function(chunk) {
+	      data += chunk;
+	    });
+	
+  	  req.on('end', function() {
+  	    // parse the data
+  	    //foo();
+		  tagInput(data);
+  	  });
+  	} else if (req.method === 'GET') {
+		fs.readFile('./nodeForm/nlpForm.html', function(error, data) {
+			res.end(data);
+		}
+	}
     var url_parts = url.parse(req.url, true);
-    util.log(url_parts);
-    if (url_parts.pathname == '/')
-	fs.readFile('./nodeform/nlpform.html', function(error, data) {
-		res.end(data);
-	});
-    else if(url_parts == '/tagInput')
-	tagInput(res,url_parts);
+    console.log(url_parts);
     res.writeHead(200, {'Content-Type': 'text/html'});
 });
 
@@ -28,8 +39,8 @@ server.listen(PORT, () => {
   util.log(`Server running ${PORT}/`);
 });
 
-function tagInput(res, url_parts) {
-	var inputString = url_parts.query.inputString;
+function tagInput(data) {
+	var inputString = data;
 	var tags = "People: \n";
 	console.log("Data passed to tagInput -> input: " + inputString);
 	var doc = nlp(inputSring);

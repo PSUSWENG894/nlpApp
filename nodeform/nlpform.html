@@ -6,14 +6,16 @@
  
 <body>
   <div>
+      <form method="post" action="/">
 	  <!-- instead of using a form, try adding an onblur event to call the function I wand to call -->
 	  <label>Please fill in the text area below to have the NLP tag it.</label><br/>
-    <textarea name="inputString" id="inputString" rows="8" cols="80" placeholder="Enter text for NLP here">President Donald Trump has decided to force NASA to collect money from private investors like Bill Gates from Seattle.</textarea><br/>
-    <label>Select from the output formats below</label><br/>
-    <input type="radio" name="outputFormat" value="XML"> XML<br/>
-    <input type="radio" name="outputFormat" value="List" checked> List<br/>
-    <input type="radio" name="outputFormat" value="JSON"> JSON<br/>
-    <button name="tagButton" id="tagButton" onclick="tagInput()">Tag</button>
+      	  <textarea name="inputString" id="inputString" rows="8" cols="80" placeholder="Enter text for NLP here">President Donald Trump has decided to force NASA to collect money from private investors like Bill Gates from Seattle.</textarea><br/>
+    	  <label>Select from the output formats below</label><br/>
+    	  <input type="radio" name="outputFormat" value="XML"> XML<br/>
+    	  <input type="radio" name="outputFormat" value="List" checked> List<br/>
+    	  <input type="radio" name="outputFormat" value="JSON"> JSON<br/>
+    	  <input type="submit" name="tagButton" id="tagButton" value="Tag">
+      </form>
   </div>
   <br></br>
   <div>
