@@ -13,6 +13,8 @@
     "node": "9.2.1"
   },
   "dependencies": {
-    "compromise": "^11.11.0"
+    "body-parser": "^1.18.3",
+    "compromise": "^11.11.0",
+    "express": "^4.16.3"
   }
 }
