@@ -1,5 +1,6 @@
 var http = require("http");
 var express = require('express');
+var nlp = require('compromise');
 var app = express();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: true });
