@@ -7,7 +7,7 @@ var nlp = require('compromise');
 var PORT = process.env.PORT || 5000;
 
 var server = http.createServer(function (req, res) {
-	if (req.method === 'POST') {
+	if (req.method === 'POST' || req.methof === 'post') {
 	    var data = '';
 	
 	    req.on('data', function(chunk) {
@@ -19,7 +19,7 @@ var server = http.createServer(function (req, res) {
   	    //foo();
 		  tagInput(data);
   	  });
-  	} else if (req.method === 'GET') {
+  	} else if (req.method === 'GET' || req.method === 'get') {
 		fs.readFile('./nodeForm/nlpForm.html', function(error, data) {
 			res.end(data);
 		}
