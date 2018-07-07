@@ -14,7 +14,7 @@ var server = app.listen(PORT, function () {
 });
  
  
-app.get('/form', function (req, res) {
+app.get('/', function (req, res) {
   var html='';
   html +="<body>";
   html += "<form method='post' action='/tagged' name='tagForm'>";
@@ -23,7 +23,7 @@ app.get('/form', function (req, res) {
   html += "<label>Select from the output formats below</label><br/>";
   html += "<input type='radio' name='outputFormat' value='XML'> XML<br/>";
   html += "<input type='radio' name='outputFormat' value='LIST' checked> List<br/>";
-  html += "<input type='radio' name='outputFormat' value='JSON> JSON<br/>";
+  html += "<input type='radio' name='outputFormat' value='JSON'> JSON<br/>";
   html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
   html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
   html += "</form>";
