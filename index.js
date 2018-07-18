@@ -21,21 +21,33 @@ app.get('/', function (req, res) {
 });
  
 app.post('/tagged', urlencodedParser, function (req, res){
-  var reply=printHtmlForm();
+  var reply=printHtmlForm('');
   reply += "<br/><b>The tagged input is shown below:</b><br/>";
   var input = req.body.inputString;
   console.log(input);
   var outputFormat = req.body.outputFormat;
   console.log(outputFormat);
-  var tags = tagInput(input);
+  var tags = tagInput(input, outputFormat);
   reply += tags;
   res.send(reply);
  });
 
- function tagInput(data) {
+ function tagInput(data, format) {
+	if (format === 'LIST') {
+		return tagList(data);
+	} else if (format === 'JSON') {
+		return tagJson(data);
+	} else if (format === 'XML') {
+		return tagXml(data);
+	} else {
+		return "Error, unknown output format."
+	}
+ }
+
+function tagList(data) {
         var inputString = data;
+        console.log("Data passed to tagList -> input: " + inputString);
         var tags = "People: <br/>";
-        console.log("Data passed to tagInput -> input: " + inputString);
         var doc = nlp(inputString);
         tags = tags + doc.people().out();
         tags = tags + "<br/>Places: </br/>";
@@ -43,14 +55,66 @@ app.post('/tagged', urlencodedParser, function (req, res){
         tags = tags + "<br/>Organizations: <br/>";
         tags = tags + doc.organizations().out();
 	return tags;
- }
+}
 
- function printHtmlForm() {
+function tagJson(data) {
+        var inputString = data;
+	var outputData = "<pre>" + data;
+        console.log("Data passed to tagJson -> input: " + inputString);
+        var doc = nlp(inputString);
+	var peeps = doc.people().out();
+	var peep;
+	for (peep in peeps) {
+		outputData = outputData.replace(peep, "{Person: " + peep + "}");
+	}
+	var locs = doc.places().out();
+	var loc;
+	for (loc in locs) {
+		outputData = outputData.replace(loc, "{Place: " + loc + "}");
+	}
+	var orgs = doc.organizations().out();
+	var org;
+	for (org in orgs) {
+		outputData = outputData.replace(org, "{Organization: " + org + "}");
+	}
+	outputData = outputData + "</pre>";
+	return outputData;
+}
+
+function tagXml(data) {
+        var inputString = data;
+	var outputData = "<pre>" + data;
+        console.log("Data passed to tagXML -> input: " + inputString);
+        var doc = nlp(inputString);
+	var peeps = doc.people().out();
+	var peep;
+	for (peep in peeps) {
+		outputData = outputData.replace(peep, "<Person>" + peep + "</Person>");
+	}
+	var locs = doc.places().out();
+	var loc;
+	for (loc in locs) {
+		outputData = outputData.replace(loc, "<Place>" + loc + "</Place>");
+	}
+	var orgs = doc.organizations().out();
+	var org;
+	for (org in orgs) {
+		outputData = outputData.replace(org, "<Organization>" + org + "</KOrganization>");
+	}
+	outputData = outputData + "</pre>";
+	return outputData;
+}
+
+ function printHtmlForm(data) {
   var html='';
   html +="<body>";
   html += "<form method='post' action='/tagged' name='tagForm'>";
   html += "<label>Please fill in the text area below to have the NLP tag it.</label><br/>";
-  html += "<textarea name='inputString' id='inputString' rows='8' cols='80' placeholder='Enter text for NLP here'></textarea><br/>";
+  html += "<textarea name='inputString' id='inputString' rows='8' cols='80' placeholder='Enter text for NLP here'>";
+  if (data !== '') {
+	  html += data;
+  }
+  html += "</textarea><br/>";
   html += "<label>Select from the output formats below</label><br/>";
   html += "<input type='radio' name='outputFormat' value='XML'> XML<br/>";
   html += "<input type='radio' name='outputFormat' value='LIST' checked> List<br/>";
