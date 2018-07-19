@@ -47,20 +47,20 @@ app.post('/tagged', urlencodedParser, function (req, res){
 function tagList(data) {
         var inputString = data;
         console.log("Data passed to tagList -> input: " + inputString);
-        var tags = "<code>People: <br/>";
+        var tags = "<textarea rows='10' cols='80' readonly='true'>People: &#13;&#10;";
         var doc = nlp(inputString);
         tags = tags + doc.people().out();
-        tags = tags + "<br/>Places: </br/>";
+        tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
         tags = tags + doc.places().out();
-        tags = tags + "<br/>Organizations: <br/>";
+        tags = tags + "&#13;&#10;&#13;&#10;Organizations: &#13;&#10;";
         tags = tags + doc.organizations().out();
-	tags = tags + "</code>";
+	tags = tags + "</textarea>";
 	return tags;
 }
 
 function tagJson(data) {
         var inputString = data;
-	var outputData = "<code>" + data;
+	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         console.log("Data passed to tagJson -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
@@ -84,13 +84,13 @@ function tagJson(data) {
 		console.log(org.text);
 		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
-	outputData = outputData + "</code>";
+	outputData = outputData + "</textarea>";
 	return outputData;
 }
 
 function tagXml(data) {
         var inputString = data;
-	var outputData = "<code>" + data;
+	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         console.log("Data passed to tagXML -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
@@ -123,8 +123,8 @@ function tagXml(data) {
   html +="<body>";
   html += "<form method='post' action='/tagged' name='tagForm'>";
   html += "<label>Please fill in the text area below to have the NLP tag it.</label><br/>";
-  html += "<textarea name='inputString' id='inputString' rows='8' cols='80' placeholder='Enter text for NLP here'>";
-  if (data !== '') {
+  html += "<textarea name='inputString' id='inputString' rows='10' cols='80' placeholder='Enter text for NLP here'>";
+  if (data && data !== '' && data !== 'undefined') {
 	  html += data;
   }
   html += "</textarea><br/>";
