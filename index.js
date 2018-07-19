@@ -89,7 +89,7 @@ function tagJson(data) {
 
 function tagXml(data) {
         var inputString = data;
-	var outputData = "<pre>" + data;
+	var outputData = "<pre lang=\"xml\">" + data;
         console.log("Data passed to tagXML -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
@@ -111,7 +111,7 @@ function tagXml(data) {
 	for (var i=0; i<orgs.length; i++) {
 		var org = orgs[i];
 		console.log(org.text);
-		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</KOrganization>");
+		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
 	}
 	outputData = outputData + "</pre>";
 	return outputData;
