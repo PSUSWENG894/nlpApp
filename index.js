@@ -64,20 +64,22 @@ function tagJson(data) {
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
 	console.log(peeps);
-	var peep;
-	for (peep in peeps) {
+	for (var i=0; i<peeps.length; i++) {
+		var peep = peeps[i];
 		console.log(peep.text);
 		outputData = outputData.replace(peep.text, "{Person: " + peep.text + "}");
 	}
 	var locs = doc.places().data();
-	var loc;
-	for (loc in locs) {
+	console.log(locs);
+	for (var i=0; i<locs.length; i++) {
+		var loc = locs[i];
 		console.log(loc.text);
 		outputData = outputData.replace(loc.text, "{Place: " + loc.text + "}");
 	}
 	var orgs = doc.organizations().data();
-	var org;
-	for (org in orgs) {
+	console.log(orgs);
+	for (var i=0; i<orgs.length; i++) {
+		var org = orgs[i];
 		console.log(org.text);
 		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
@@ -92,20 +94,22 @@ function tagXml(data) {
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
 	console.log(peeps);
-	var peep;
-	for (peep in peeps) {
+	for (var i=0; i<peeps.length; i++) {
+		var peep = peeps[i];
 		console.log(peep.text);
 		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
 	}
 	var locs = doc.places().data();
-	var loc;
-	for (loc in locs) {
+	console.log(locs);
+	for (var i=0; i<locs.length; i++) {
+		var loc = locs[i];
 		console.log(loc.text);
 		outputData = outputData.replace(loc.text, "<Place>" + loc.text + "</Place>");
 	}
 	var orgs = doc.organizations().data();
-	var org;
-	for (org in orgs) {
+	console.log(orgs);
+	for (var i=0; i<orgs.length; i++) {
+		var org = orgs[i];
 		console.log(org.text);
 		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</KOrganization>");
 	}
