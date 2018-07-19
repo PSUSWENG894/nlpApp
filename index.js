@@ -62,20 +62,24 @@ function tagJson(data) {
 	var outputData = "<pre>" + data;
         console.log("Data passed to tagJson -> input: " + inputString);
         var doc = nlp(inputString);
-	var peeps = doc.people().out();
+	var peeps = doc.people().data();
+	console.log(peeps);
 	var peep;
 	for (peep in peeps) {
-		outputData = outputData.replace(peep, "{Person: " + peep + "}");
+		console.log(peep.text);
+		outputData = outputData.replace(peep.text, "{Person: " + peep.text + "}");
 	}
-	var locs = doc.places().out();
+	var locs = doc.places().data();
 	var loc;
 	for (loc in locs) {
-		outputData = outputData.replace(loc, "{Place: " + loc + "}");
+		console.log(loc.text);
+		outputData = outputData.replace(loc.text, "{Place: " + loc.text + "}");
 	}
-	var orgs = doc.organizations().out();
+	var orgs = doc.organizations().data();
 	var org;
 	for (org in orgs) {
-		outputData = outputData.replace(org, "{Organization: " + org + "}");
+		console.log(org.text);
+		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
 	outputData = outputData + "</pre>";
 	return outputData;
@@ -86,20 +90,24 @@ function tagXml(data) {
 	var outputData = "<pre>" + data;
         console.log("Data passed to tagXML -> input: " + inputString);
         var doc = nlp(inputString);
-	var peeps = doc.people().out();
+	var peeps = doc.people().data();
+	console.log(peeps);
 	var peep;
 	for (peep in peeps) {
-		outputData = outputData.replace(peep, "<Person>" + peep + "</Person>");
+		console.log(peep.text);
+		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
 	}
-	var locs = doc.places().out();
+	var locs = doc.places().data();
 	var loc;
 	for (loc in locs) {
-		outputData = outputData.replace(loc, "<Place>" + loc + "</Place>");
+		console.log(loc.text);
+		outputData = outputData.replace(loc.text, "<Place>" + loc.text + "</Place>");
 	}
-	var orgs = doc.organizations().out();
+	var orgs = doc.organizations().data();
 	var org;
 	for (org in orgs) {
-		outputData = outputData.replace(org, "<Organization>" + org + "</KOrganization>");
+		console.log(org.text);
+		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</KOrganization>");
 	}
 	outputData = outputData + "</pre>";
 	return outputData;
