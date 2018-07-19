@@ -47,19 +47,20 @@ app.post('/tagged', urlencodedParser, function (req, res){
 function tagList(data) {
         var inputString = data;
         console.log("Data passed to tagList -> input: " + inputString);
-        var tags = "People: <br/>";
+        var tags = "<code>People: <br/>";
         var doc = nlp(inputString);
         tags = tags + doc.people().out();
         tags = tags + "<br/>Places: </br/>";
         tags = tags + doc.places().out();
         tags = tags + "<br/>Organizations: <br/>";
         tags = tags + doc.organizations().out();
+	tags = tags + "</code>";
 	return tags;
 }
 
 function tagJson(data) {
         var inputString = data;
-	var outputData = "<pre>" + data;
+	var outputData = "<code>" + data;
         console.log("Data passed to tagJson -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
@@ -83,13 +84,13 @@ function tagJson(data) {
 		console.log(org.text);
 		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
-	outputData = outputData + "</pre>";
+	outputData = outputData + "</code>";
 	return outputData;
 }
 
 function tagXml(data) {
         var inputString = data;
-	var outputData = "<pre lang=\"xml\">" + data;
+	var outputData = "<code>" + data;
         console.log("Data passed to tagXML -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
@@ -113,7 +114,7 @@ function tagXml(data) {
 		console.log(org.text);
 		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
 	}
-	outputData = outputData + "</pre>";
+	outputData = outputData + "</code>";
 	return outputData;
 }
 
