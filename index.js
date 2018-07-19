@@ -16,16 +16,16 @@ var server = app.listen(PORT, function () {
  
  
 app.get('/', function (req, res) {
-  var html=printHtmlForm();
+  var html=printHtmlForm('','LIST');
   res.send(html);
 });
  
 app.post('/tagged', urlencodedParser, function (req, res){
-  var reply=printHtmlForm('');
-  reply += "<br/><b>The tagged input is shown below:</b><br/>";
   var input = req.body.inputString;
-  console.log(input);
   var outputFormat = req.body.outputFormat;
+  var reply=printHtmlForm(input, outputFormat);
+  reply += "<br/><b>The tagged input is shown below:</b><br/>";
+  console.log(input);
   console.log(outputFormat);
   var tags = tagInput(input, outputFormat);
   reply += tags;
@@ -118,7 +118,7 @@ function tagXml(data) {
 	return outputData;
 }
 
- function printHtmlForm(data) {
+ function printHtmlForm(data, format) {
   var html='';
   html +="<body>";
   html += "<form method='post' action='/tagged' name='tagForm'>";
@@ -129,9 +129,21 @@ function tagXml(data) {
   }
   html += "</textarea><br/>";
   html += "<label>Select from the output formats below</label><br/>";
-  html += "<input type='radio' name='outputFormat' value='XML'> XML<br/>";
-  html += "<input type='radio' name='outputFormat' value='LIST' checked> List<br/>";
-  html += "<input type='radio' name='outputFormat' value='JSON'> JSON<br/>";
+  html += "<input type='radio' name='outputFormat' value='XML'";
+  if (format && format ==='XML') {
+	  html += " checked";
+  }
+  html += "> XML<br/>";
+  html += "<input type='radio' name='outputFormat' value='LIST'";
+  if (format && format ==='LIST') {
+	  html += " checked";
+  }
+  html += "> List<br/>";
+  html += "<input type='radio' name='outputFormat' value='JSON'";
+  if (format && format ==='JSON') {
+	  html += " checked";
+  }
+  html += "> JSON<br/>";
   html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
   html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
   html += "</form>";
