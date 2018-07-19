@@ -11,7 +11,7 @@ var PORT = process.env.PORT || 5000;
 var server = app.listen(PORT, function () {
   var host = server.address().address
   var port = server.address().port
-  console.log("Example app listening at %s:%s Port", host, port)
+  console.log("Example app listening at %s:%s", host, port)
 });
  
  
@@ -25,8 +25,6 @@ app.post('/tagged', urlencodedParser, function (req, res){
   var outputFormat = req.body.outputFormat;
   var reply=printHtmlForm(input, outputFormat);
   reply += "<br/><b>The tagged input is shown below:</b><br/>";
-  console.log(input);
-  console.log(outputFormat);
   var tags = tagInput(input, outputFormat);
   reply += tags;
   res.send(reply);
@@ -46,7 +44,6 @@ app.post('/tagged', urlencodedParser, function (req, res){
 
 function tagList(data) {
         var inputString = data;
-        console.log("Data passed to tagList -> input: " + inputString);
         var tags = "<textarea rows='10' cols='80' readonly='true'>People: &#13;&#10;";
         var doc = nlp(inputString);
         tags = tags + doc.people().out();
@@ -61,27 +58,20 @@ function tagList(data) {
 function tagJson(data) {
         var inputString = data;
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
-        console.log("Data passed to tagJson -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
-	console.log(peeps);
 	for (var i=0; i<peeps.length; i++) {
 		var peep = peeps[i];
-		console.log(peep.text);
 		outputData = outputData.replace(peep.text, "{Person: " + peep.text + "}");
 	}
 	var locs = doc.places().data();
-	console.log(locs);
 	for (var i=0; i<locs.length; i++) {
 		var loc = locs[i];
-		console.log(loc.text);
 		outputData = outputData.replace(loc.text, "{Place: " + loc.text + "}");
 	}
 	var orgs = doc.organizations().data();
-	console.log(orgs);
 	for (var i=0; i<orgs.length; i++) {
 		var org = orgs[i];
-		console.log(org.text);
 		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
 	outputData = outputData + "</textarea>";
@@ -91,27 +81,20 @@ function tagJson(data) {
 function tagXml(data) {
         var inputString = data;
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
-        console.log("Data passed to tagXML -> input: " + inputString);
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
-	console.log(peeps);
 	for (var i=0; i<peeps.length; i++) {
 		var peep = peeps[i];
-		console.log(peep.text);
 		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
 	}
 	var locs = doc.places().data();
-	console.log(locs);
 	for (var i=0; i<locs.length; i++) {
 		var loc = locs[i];
-		console.log(loc.text);
 		outputData = outputData.replace(loc.text, "<Place>" + loc.text + "</Place>");
 	}
 	var orgs = doc.organizations().data();
-	console.log(orgs);
 	for (var i=0; i<orgs.length; i++) {
 		var org = orgs[i];
-		console.log(org.text);
 		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
 	}
 	outputData = outputData + "</code>";
