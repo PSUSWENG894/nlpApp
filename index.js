@@ -52,17 +52,26 @@ function tagList(data, selections) {
 	console.log(doc.phoneNumbers().data());
 	console.log(doc.values().data());
 //	console.log(doc.money());
-	if (selections.indexOf('People') > -1) {
+	if (selections.indexOf('Person') > -1) {
 		tags = tags + "People: &#13;&#10;";
-		tags = tags + doc.people().out();
+		for (var i=0; i<doc.people().data().length; i++) {
+			tags = tags + "&#9;" + doc.people().data()[i].text + "&#13;&#10;";
+		}
+		tags = tags + "&#13;&#10;&#13;&#10;";
 	}
 	if (selections.indexOf('Place') > -1) {
-        	tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
-        	tags = tags + doc.places().out();
+        	tags = tags + "Places: &#13;&#10;";
+		for (var i=0; i<doc.places().data().length; i++) {
+			tags = tags + "&#9;" + doc.places().data()[i].text + "&#13;&#10;";
+		}
+		tags = tags + "&#13;&#10;&#13;&#10;";
 	}
 	if (selections.indexOf('Organization') > -1) {
-        	tags = tags + "&#13;&#10;&#13;&#10;Organizations: &#13;&#10;";
-        	tags = tags + doc.organizations().out();
+        	tags = tags + "Organizations: &#13;&#10;";
+		for (var i=0; i<doc.organizations().data().length; i++) {
+			tags = tags + "&#9;" + doc.people().data()[i].text + "&#13;&#10;";
+		}
+		tags = tags + "&#13;&#10;&#13;&#10;";
 	}
 	tags = tags + "</textarea>";
 	return tags;
