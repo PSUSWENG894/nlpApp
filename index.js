@@ -187,7 +187,7 @@ function tagXml(data, selections) {
 	  html += " checked";
   }
   html += "> Date/Time<br/>";
-  html += "<input type='checkbox' name='selections' value='PhoneNumber';
+  html += "<input type='checkbox' name='selections' value='PhoneNumber'";
   if (selections.indexOf('PhoneNumber') > -1) {
 	  html += " checked";
   }
