@@ -24,7 +24,7 @@ app.post('/tagged', urlencodedParser, function (req, res){
   var input = req.body.inputString;
   var outputFormat = req.body.outputFormat;
   var selections = req.body.selections;
-  console.log(selections);
+  console.log(req.body);
   var reply=printHtmlForm(input, outputFormat, selections);
   reply += "<br/><b>The tagged input is shown below:</b><br/>";
   var tags = tagInput(input, outputFormat, selections);
@@ -48,10 +48,10 @@ function tagList(data, selections) {
         var inputString = data;
         var tags = "<textarea rows='10' cols='80' readonly='true'>People: &#13;&#10;";
         var doc = nlp(inputString);
-	console.log(doc.dates());
-	console.log(doc.phoneNumbers());
-	console.log(doc.values());
-	console.log(doc.money());
+	console.log(doc.dates().out);
+	console.log(doc.phoneNumbers().out);
+	console.log(doc.values()).out;
+//	console.log(doc.money());
 	tags = tags + doc.people().out();
         tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
         tags = tags + doc.places().out();
