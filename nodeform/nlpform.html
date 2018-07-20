@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>NLP Form</title>
+</head>
+ 
+<body>
+  <div>
+      <form method="post" action="/">
+	  <!-- instead of using a form, try adding an onblur event to call the function I wand to call -->
+	  <label>Please fill in the text area below to have the NLP tag it.</label><br/>
+      	  <textarea name="inputString" id="inputString" rows="8" cols="80" placeholder="Enter text for NLP here">President Donald Trump has decided to force NASA to collect money from private investors like Bill Gates from Seattle.</textarea><br/>
+    	  <label>Select from the output formats below</label><br/>
+    	  <input type="radio" name="outputFormat" value="XML"> XML<br/>
+    	  <input type="radio" name="outputFormat" value="List" checked> List<br/>
+    	  <input type="radio" name="outputFormat" value="JSON"> JSON<br/>
+    	  <input type="submit" name="tagButton" id="tagButton" value="Tag">
+      </form>
+  </div>
+  <br></br>
+  <div>
+    <h2>The tagged string will appear below.</h2>
+    <textarea name="outputString" id="outputString" rows="8" cols="80" readonly="true">People: 
+Donald Trump
+Bill Gates 
+	    
+Organizations: 
+NASA 
+	    
+Locations: 
+Seattle</textarea>
+  </div>
+</body>
+</html>
