@@ -16,7 +16,7 @@ var server = app.listen(PORT, function () {
  
  
 app.get('/', function (req, res) {
-  var html=printHtmlForm('', 'LIST', null);
+  var html=printHtmlForm('', 'LIST', ['Person', 'Place', 'Organization', 'DateTime', 'PhoneNumber']);
   res.send(html);
 });
  
@@ -69,9 +69,21 @@ function tagList(data, selections) {
 	if (selections.indexOf('Organization') > -1) {
         	tags = tags + "Organizations: &#13;&#10;";
 		for (var i=0; i<doc.organizations().data().length; i++) {
-			tags = tags + "&#9;" + doc.people().data()[i].text + "&#13;&#10;";
+			tags = tags + "&#9;" + doc.organizations().data()[i].text + "&#13;&#10;";
 		}
 		tags = tags + "&#13;&#10;&#13;&#10;";
+	}
+	if (selections.indexOf('DateTime') > -1) {
+		tags = tags + "&#9;" + doc.dates().data();
+		for (var i=0; i<doc.dates().data().length; i++) {
+			tags = tags + "&#9;" + doc.dates().data()[i].text + "&#13;&#10;";
+		}
+	}
+	if (selections.indexOf('PhoneNumber') > -1) {
+		tags = tags + "&#9;" + doc.phoneNumbers().data();
+		for (var i=0; i<doc.dates().data().length; i++) {
+			tags = tags + "&#9;" + doc.dates().data()[i].text + "&#13;&#10;";
+		}
 	}
 	tags = tags + "</textarea>";
 	return tags;
@@ -105,7 +117,7 @@ function tagXml(data, selections) {
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
-	for (var i=0; i<peeps.length; i++) {
+	for (var i=0; i<peeps.length; i++) {`
 		var peep = peeps[i];
 		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
 	}
@@ -151,13 +163,31 @@ function tagXml(data, selections) {
   }
   html += "> JSON<br/>";
   html += "<b><label>Select the checkboxes below for the categories you want tagged</label></b><br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Person<br/>";
-  html += "<input type='checkbox' name='selections' value='Place'> Place<br/>";
-  html += "<input type='checkbox' name='selections' value='Organization'> Organization<br/>";
-  html += "<input type='checkbox' name='selections' value='Date'> Date<br/>";
-  html += "<input type='checkbox' name='selections' value='Money'> Money<br/>";
-  html += "<input type='checkbox' name='selections' value='Percent'> Percent<br/>";
-  html += "<input type='checkbox' name='selections' value='PhoneNumber'> Phone Number<br/>";
+  html += "<input type='checkbox' name='selections' value='Person'";
+  if (selections.indexOf('Person') > -1) {
+	  html += " checked";
+  }
+  html += "> Person<br/>";
+  html += "<input type='checkbox' name='selections' value='Place'";
+  if (selections.indexOf('Place') > -1) {
+	  html += " checked";
+  }
+  html += "> Place<br/>";
+  html += "<input type='checkbox' name='selections' value='Organization'";
+  if (selections.indexOf('Organization') > -1) {
+	  html += " checked";
+  }
+  html += "> Organization<br/>";
+  html += "<input type='checkbox' name='selections' value='DateTime'";
+  if (selections.indexOf('DateTime') > -1) {
+	  html += " checked";
+  }
+  html += "> Date/Time<br/>";
+  html += "<input type='checkbox' name='selections' value='PhoneNumber';
+  if (selections.indexOf('PhoneNumber') > -1) {
+	  html += " checked";
+  }
+  html += "> Phone Number<br/>";
   html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
   html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
   html += "</form>";
