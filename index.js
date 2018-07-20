@@ -93,30 +93,40 @@ function tagJson(data, selections) {
         var inputString = data;
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         var doc = nlp(inputString);
-	var peeps = doc.people().data();
-	for (var i=0; i<peeps.length; i++) {
-		var peep = peeps[i];
-		outputData = outputData.replace(peep.text, "{Person: " + peep.text + "}");
+	if (selections.indexOf('Person') > -1) {
+		var peeps = doc.people().data();
+		for (var i=0; i<peeps.length; i++) {
+			var peep = peeps[i];
+			outputData = outputData.replace(peep.text, "{Person: " + peep.text + "}");
+		}
 	}
-	var locs = doc.places().data();
-	for (var i=0; i<locs.length; i++) {
-		var loc = locs[i];
-		outputData = outputData.replace(loc.text, "{Place: " + loc.text + "}");
+	if (selections.indexOf('Place') > -1) {
+		var locs = doc.places().data();
+		for (var i=0; i<locs.length; i++) {
+			var loc = locs[i];
+			outputData = outputData.replace(loc.text, "{Place: " + loc.text + "}");
+		}
 	}
-	var orgs = doc.organizations().data();
-	for (var i=0; i<orgs.length; i++) {
-		var org = orgs[i];
-		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
+	if (selections.indexOf('Organization') > -1) {
+		var orgs = doc.organizations().data();
+		for (var i=0; i<orgs.length; i++) {
+			var org = orgs[i];
+			outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
+		}
 	}
-	var dates = doc.dates().data();
-	for (var i=0; i<dates.length; i++) {
-		var dateTime = dates[i];
-		outputData = outputData.replace(dateTime.text, "{DateTime: " + dateTime.text + "}");
+	if (selections.indexOf('DateTime') > -1) {
+		var dates = doc.dates().data();
+		for (var i=0; i<dates.length; i++) {
+			var dateTime = dates[i];
+			outputData = outputData.replace(dateTime.text, "{DateTime: " + dateTime.text + "}");
+		}
 	}
-	var numbers = doc.phoneNumbers().data();
-	for (var i=0; i<numbers.length; i++) {
-		var number = numbers[i];
-		outputData = outputData.replace(number.text, "{PhoneNumber: " + number.text + "}");
+	if (selections.indexOf('PhoneNumber') > -1) {
+		var numbers = doc.phoneNumbers().data();
+		for (var i=0; i<numbers.length; i++) {
+			var number = numbers[i];
+			outputData = outputData.replace(number.text, "{PhoneNumber: " + number.text + "}");
+		}
 	}
 	outputData = outputData + "</textarea>";
 	return outputData;
@@ -126,30 +136,40 @@ function tagXml(data, selections) {
         var inputString = data;
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         var doc = nlp(inputString);
-	var peeps = doc.people().data();
-	for (var i=0; i<peeps.length; i++) {
-		var peep = peeps[i];
-		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
+	if (selections.indexOf('Person') > -1) {
+		var peeps = doc.people().data();
+		for (var i=0; i<peeps.length; i++) {
+			var peep = peeps[i];
+			outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
+		}
 	}
-	var locs = doc.places().data();
-	for (var i=0; i<locs.length; i++) {
-		var loc = locs[i];
-		outputData = outputData.replace(loc.text, "<Place>" + loc.text + "</Place>");
+	if (selections.indexOf('Place') > -1) {
+		var locs = doc.places().data();
+		for (var i=0; i<locs.length; i++) {
+			var loc = locs[i];
+			outputData = outputData.replace(loc.text, "<Place>" + loc.text + "</Place>");
+		}
 	}
-	var orgs = doc.organizations().data();
-	for (var i=0; i<orgs.length; i++) {
-		var org = orgs[i];
-		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
+	if (selections.indexOf('Organization') > -1) {
+		var orgs = doc.organizations().data();
+		for (var i=0; i<orgs.length; i++) {
+			var org = orgs[i];
+			outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
+		}
 	}
-	var dates = doc.dates().data();
-	for (var i=0; i<dates.length; i++) {
-		var dateTime = dates[i];
-		outputData = outputData.replace(dateTime.text, "<DateTime>" + dateTime.text + "</DateTime>");
+	if (selections.indexOf('DateTime') > -1) {
+		var dates = doc.dates().data();
+		for (var i=0; i<dates.length; i++) {
+			var dateTime = dates[i];
+			outputData = outputData.replace(dateTime.text, "<DateTime>" + dateTime.text + "</DateTime>");
+		}
 	}
-	var numbers = doc.phoneNumbers().data();
-	for (var i=0; i<numbers.length; i++) {
-		var number = numbers[i];
-		outputData = outputData.replace(number.text, "<PhoneNumber> " + number.text + "</PhoneNumber>");
+	if (selections.indexOf('PhoneNumber') > -1) {
+		var numbers = doc.phoneNumbers().data();
+		for (var i=0; i<numbers.length; i++) {
+			var number = numbers[i];
+			outputData = outputData.replace(number.text, "<PhoneNumber> " + number.text + "</PhoneNumber>");
+		}
 	}
 	outputData = outputData + "</code>";
 	return outputData;
