@@ -50,10 +50,6 @@ function tagList(data, selections) {
 	var tab = "&#9;";
         var tags = "<textarea rows='10' cols='80' readonly='true'>";
         var doc = nlp(inputString);
-	console.log(doc.dates().data());
-	console.log(doc.phoneNumbers().data());
-	console.log(doc.values().data());
-//	console.log(doc.money());
 	if (selections.indexOf('Person') > -1) {
 		tags = tags + "People: " + newline;
 		for (var i=0; i<doc.people().data().length; i++) {
@@ -62,29 +58,29 @@ function tagList(data, selections) {
 		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('Place') > -1) {
-        	tags = tags + "Places: &#13;&#10;";
+        	tags = tags + "Places: " + newline;
 		for (var i=0; i<doc.places().data().length; i++) {
 			tags = tags + tab + doc.places().data()[i].text + newline;
 		}
 		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('Organization') > -1) {
-        	tags = tags + "Organizations: &#13;&#10;";
+        	tags = tags + "Organizations: " + newline;
 		for (var i=0; i<doc.organizations().data().length; i++) {
 			tags = tags + tab + doc.organizations().data()[i].text + newline;
 		}
 		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('DateTime') > -1) {
-		tags = tags + "&#9;" + doc.dates().data();
+		tags = tags + "Date/Time: " + newline;
 		for (var i=0; i<doc.dates().data().length; i++) {
 			tags = tags + tab + doc.dates().data()[i].text + newline;
 		}
 		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('PhoneNumber') > -1) {
-		tags = tags + "&#9;" + doc.phoneNumbers().data();
-		for (var i=0; i<doc.dates().data().length; i++) {
+		tags = tags + "Phone Numbers: " + newline;
+		for (var i=0; i<doc.phoneNumberts().data().length; i++) {
 			tags = tags + tab + doc.dates().data()[i].text + newline;
 		}
 		tags = tags + newline + newline;
@@ -112,6 +108,16 @@ function tagJson(data, selections) {
 		var org = orgs[i];
 		outputData = outputData.replace(org.text, "{Organization: " + org.text + "}");
 	}
+	var dates = doc.dates().data();
+	for (var i=0; i<dates.length; i++) {
+		var dateTime = dates[i];
+		outputData = outputData.replace(dateTime.text, "{DateTime: " + dateTime.text + "}");
+	}
+	var numbers = doc.phoneNumbers().data();
+	for (var i=0; i<numbers.length; i++) {
+		var number = numbers[i];
+		outputData = outputData.replace(number.text, "{PhoneNumber: " + number.text + "}";
+	}
 	outputData = outputData + "</textarea>";
 	return outputData;
 }
@@ -134,6 +140,16 @@ function tagXml(data, selections) {
 	for (var i=0; i<orgs.length; i++) {
 		var org = orgs[i];
 		outputData = outputData.replace(org.text, "<Organization>" + org.text + "</Organization>");
+	}
+	var dates = doc.dates().data();
+	for (var i=0; i<dates.length; i++) {
+		var dateTime = dates[i];
+		outputData = outputData.replace(dateTime.text, "<DateTime>" + dateTime.text + "</DateTime>");
+	}
+	var numbers = doc.phoneNumbers().data();
+	for (var i=0; i<numbers.length; i++) {
+		var number = numbers[i];
+		outputData = outputData.replace(number.text, "<PhoneNumber> " + number.text + "</PhoneNumber>";
 	}
 	outputData = outputData + "</code>";
 	return outputData;
