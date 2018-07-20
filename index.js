@@ -81,7 +81,7 @@ function tagList(data, selections) {
 	if (selections.indexOf('PhoneNumber') > -1) {
 		tags = tags + "Phone Numbers: " + newline;
 		for (var i=0; i<doc.phoneNumbers().data().length; i++) {
-			tags = tags + tab + doc.dates().data()[i].text + newline;
+			tags = tags + tab + doc.phoneNumbers().data()[i].text + newline;
 		}
 		tags = tags + newline + newline;
 	}
