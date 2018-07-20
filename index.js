@@ -116,7 +116,7 @@ function tagJson(data, selections) {
 	var numbers = doc.phoneNumbers().data();
 	for (var i=0; i<numbers.length; i++) {
 		var number = numbers[i];
-		outputData = outputData.replace(number.text, "{PhoneNumber: " + number.text + "}";
+		outputData = outputData.replace(number.text, "{PhoneNumber: " + number.text + "}");
 	}
 	outputData = outputData + "</textarea>";
 	return outputData;
@@ -149,7 +149,7 @@ function tagXml(data, selections) {
 	var numbers = doc.phoneNumbers().data();
 	for (var i=0; i<numbers.length; i++) {
 		var number = numbers[i];
-		outputData = outputData.replace(number.text, "<PhoneNumber> " + number.text + "</PhoneNumber>";
+		outputData = outputData.replace(number.text, "<PhoneNumber> " + number.text + "</PhoneNumber>");
 	}
 	outputData = outputData + "</code>";
 	return outputData;
