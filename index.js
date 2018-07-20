@@ -136,12 +136,12 @@ function tagXml(data, selections) {
   html += "> JSON<br/>";
   html += "<b><label>Select the checkboxes below for the categories you want tagged</label></b><br/>";
   html += "<input type='checkbox' name='selections' value='Person'> Person<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Place<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Organization<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Date<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Money<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Percent<br/>";
-  html += "<input type='checkbox' name='selections' value='Person'> Phone Number<br/>";
+  html += "<input type='checkbox' name='selections' value='Place'> Place<br/>";
+  html += "<input type='checkbox' name='selections' value='Organization'> Organization<br/>";
+  html += "<input type='checkbox' name='selections' value='Date'> Date<br/>";
+  html += "<input type='checkbox' name='selections' value='Money'> Money<br/>";
+  html += "<input type='checkbox' name='selections' value='Percent'> Percent<br/>";
+  html += "<input type='checkbox' name='selections' value='PhoneNumber'> Phone Number<br/>";
   html += "<input type='submit' name='tagButton' id='tagButton' value='Tag'><br/>";
   html += "<input type='reset' name='resetButton' id='resetButton' value='Reset'><br/>";
   html += "</form>";
