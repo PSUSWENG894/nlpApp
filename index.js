@@ -46,17 +46,24 @@ app.post('/tagged', urlencodedParser, function (req, res){
 
 function tagList(data, selections) {
         var inputString = data;
-        var tags = "<textarea rows='10' cols='80' readonly='true'>People: &#13;&#10;";
+        var tags = "<textarea rows='10' cols='80' readonly='true'>";
         var doc = nlp(inputString);
-	console.log(doc.dates().out());
-	console.log(doc.phoneNumbers().out());
-	console.log(doc.values().out());
+	console.log(doc.dates().data());
+	console.log(doc.phoneNumbers().data());
+	console.log(doc.values().data());
 //	console.log(doc.money());
-	tags = tags + doc.people().out();
-        tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
-        tags = tags + doc.places().out();
-        tags = tags + "&#13;&#10;&#13;&#10;Organizations: &#13;&#10;";
-        tags = tags + doc.organizations().out();
+	if (selections.indexOf('People') > -1) {
+		tags = tags + "People: &#13;&#10;";
+		tags = tags + doc.people().out();
+	}
+	if (selections.indexOf('Place') > -1) {
+        	tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
+        	tags = tags + doc.places().out();
+	}
+	if (selections.indexOf('Organization') > -1) {
+        	tags = tags + "&#13;&#10;&#13;&#10;Organizations: &#13;&#10;";
+        	tags = tags + doc.organizations().out();
+	}
 	tags = tags + "</textarea>";
 	return tags;
 }
