@@ -46,6 +46,8 @@ app.post('/tagged', urlencodedParser, function (req, res){
 
 function tagList(data, selections) {
         var inputString = data;
+	var newline = "&#13;&#10;";
+	var tab = "&#9;";
         var tags = "<textarea rows='10' cols='80' readonly='true'>";
         var doc = nlp(inputString);
 	console.log(doc.dates().data());
@@ -53,37 +55,39 @@ function tagList(data, selections) {
 	console.log(doc.values().data());
 //	console.log(doc.money());
 	if (selections.indexOf('Person') > -1) {
-		tags = tags + "People: &#13;&#10;";
+		tags = tags + "People: " + newline;
 		for (var i=0; i<doc.people().data().length; i++) {
-			tags = tags + "&#9;" + doc.people().data()[i].text + "&#13;&#10;";
+			tags = tags + tab + doc.people().data()[i].text + newline;
 		}
-		tags = tags + "&#13;&#10;&#13;&#10;";
+		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('Place') > -1) {
         	tags = tags + "Places: &#13;&#10;";
 		for (var i=0; i<doc.places().data().length; i++) {
-			tags = tags + "&#9;" + doc.places().data()[i].text + "&#13;&#10;";
+			tags = tags + tab + doc.places().data()[i].text + newline;
 		}
-		tags = tags + "&#13;&#10;&#13;&#10;";
+		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('Organization') > -1) {
         	tags = tags + "Organizations: &#13;&#10;";
 		for (var i=0; i<doc.organizations().data().length; i++) {
-			tags = tags + "&#9;" + doc.organizations().data()[i].text + "&#13;&#10;";
+			tags = tags + tab + doc.organizations().data()[i].text + newline;
 		}
-		tags = tags + "&#13;&#10;&#13;&#10;";
+		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('DateTime') > -1) {
 		tags = tags + "&#9;" + doc.dates().data();
 		for (var i=0; i<doc.dates().data().length; i++) {
-			tags = tags + "&#9;" + doc.dates().data()[i].text + "&#13;&#10;";
+			tags = tags + tab + doc.dates().data()[i].text + newline;
 		}
+		tags = tags + newline + newline;
 	}
 	if (selections.indexOf('PhoneNumber') > -1) {
 		tags = tags + "&#9;" + doc.phoneNumbers().data();
 		for (var i=0; i<doc.dates().data().length; i++) {
-			tags = tags + "&#9;" + doc.dates().data()[i].text + "&#13;&#10;";
+			tags = tags + tab + doc.dates().data()[i].text + newline;
 		}
+		tags = tags + newline + newline;
 	}
 	tags = tags + "</textarea>";
 	return tags;
@@ -117,7 +121,7 @@ function tagXml(data, selections) {
 	var outputData = "<textarea rows='10' cols='80' readonly='true'>" + data;
         var doc = nlp(inputString);
 	var peeps = doc.people().data();
-	for (var i=0; i<peeps.length; i++) {`
+	for (var i=0; i<peeps.length; i++) {
 		var peep = peeps[i];
 		outputData = outputData.replace(peep.text, "<Person>" + peep.text + "</Person>");
 	}
