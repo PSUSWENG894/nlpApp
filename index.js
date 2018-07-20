@@ -48,9 +48,9 @@ function tagList(data, selections) {
         var inputString = data;
         var tags = "<textarea rows='10' cols='80' readonly='true'>People: &#13;&#10;";
         var doc = nlp(inputString);
-	console.log(doc.dates().out);
-	console.log(doc.phoneNumbers().out);
-	console.log(doc.values()).out;
+	console.log(doc.dates().out());
+	console.log(doc.phoneNumbers().out());
+	console.log(doc.values().out());
 //	console.log(doc.money());
 	tags = tags + doc.people().out();
         tags = tags + "&#13;&#10;&#13;&#10;Places: &#13;&#10;";
