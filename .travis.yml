@@ -18,7 +18,6 @@ script: npm run coverage
 deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY_MRC5163
-  app:
-    nlp-app-sweng894
+  app: nlp-app-sweng894
   on:
     all_branches: true
